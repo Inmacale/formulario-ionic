@@ -1,0 +1,7 @@
+{
+  "name": "formulario-ionic",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
