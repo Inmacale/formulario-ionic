@@ -1,0 +1,10 @@
+ion-checkbox {
+    --border-color: var(--color-grey);
+    --border-color-checked: var(--color-grey);
+    --checkbox-background-checked: #fff;
+    --checkmark-color: var(--color-grey);
+
+    +ion-checkbox {
+        margin-top: 12px;
+    }
+}

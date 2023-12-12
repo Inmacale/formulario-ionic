@@ -4,51 +4,57 @@
     <ion-img src="assets/BTC.png"></ion-img>
   </div>
 
-  <ion-grid>
-    <ion-row>
-      <ion-col size="12">
-        <ion-select label="Select country (required)" interface="popover" label-placement="floating">
-          <ion-select-option value="Spain"> Spain</ion-select-option>
-          <ion-select-option value="France"> France</ion-select-option>
-        </ion-select>
-      </ion-col>
-      <ion-col size="12">
-        <ion-item lines="none">
-          <ion-input type="name" label="First name (required)" label-placement="floating"
-            placeholder="First name"></ion-input>
-        </ion-item>
-      </ion-col>
-      <ion-col size="12">
-        <ion-item lines="none">
-          <ion-input type="name" label="Last name (required)" label-placement="floating"
-            placeholder="Last name"></ion-input>
-        </ion-item>
-      </ion-col>
-      <ion-col size="12">
-        <ion-item lines="none">
-          <ion-input type="name" label="Company (required)" label-placement="floating"
-            placeholder="Company"></ion-input>
-        </ion-item>
-      </ion-col>
-      <ion-col size="12">
-        <ion-item lines="none">
-          <ion-input type="tel" label="Phone (required)" label-placement="floating" placeholder="Phone"></ion-input>
-        </ion-item>
-      </ion-col>
+  <form [formGroup]="registerForm">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12">
+          <ion-item lines="none">
+            <ion-select label="Select country (required)" interface="popover" label-placement="floating"
+              formControlName="selectCountry">
+              <ion-select-option value="Spain"> Spain</ion-select-option>
+              <ion-select-option value="France"> France</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12">
+          <ion-item lines="none">
+            <ion-input type="name" label="First name (required)" label-placement="floating" placeholder="First name"
+              formControlName="firstName"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12">
+          <ion-item lines="none">
+            <ion-input type="name" label="Last name (required)" label-placement="floating" placeholder="Last name"
+              formControlName="lastName"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12">
+          <ion-item lines="none">
+            <ion-input type="name" label="Company (required)" label-placement="floating" placeholder="Company"
+              formControlName="company"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12">
+          <ion-item lines="none">
+            <ion-input type="tel" label="Phone (required)" label-placement="floating" placeholder="Phone"
+              formControlName="phone"></ion-input>
+          </ion-item>
+        </ion-col>
 
-      <ion-col size="12">
-        <ion-checkbox labelPlacement="end">Accept Terms and Conditions</ion-checkbox>
-      </ion-col>
-      <ion-col size="12">
-        <ion-checkbox labelPlacement="end">Accept Privacy Policy</ion-checkbox>
-      </ion-col>
-      <ion-col size="12">
-        <ion-button expand="block">Register</ion-button>
-      </ion-col>
-      <ion-col size="12">
-        <ion-button expand="block">ALREADY HAVE AN ACCOUNT? LOGIN</ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+        <ion-col size="12">
+          <ion-checkbox mode="md" labelPlacement="end" formControlName="termsConditions">Accept Terms and
+            Conditions</ion-checkbox>
+          <ion-checkbox mode="md" labelPlacement="end" formControlName="privacyPolicy">Accept Privacy
+            Policy</ion-checkbox>
+        </ion-col>
+        <ion-col size="12">
+          <ion-button class="register" expand="block" [disabled]="registerForm.invalid">Register</ion-button>
+        </ion-col>
+        <ion-col size="12">
+          <ion-button class="login" expand="block">ALREADY HAVE AN ACCOUNT? LOGIN</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
 
 </ion-content>
