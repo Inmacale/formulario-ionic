@@ -12,7 +12,7 @@ import { debounce, debounceTime } from 'rxjs';
 export class FormularioPage {
 
   registerForm: FormGroup = this.formBuilder.group({});
-  formErrors: any[] = [];
+
 
   constructor(private formBuilder: FormBuilder) {
     this.createForm();
@@ -31,32 +31,9 @@ export class FormularioPage {
 
     });
 
-    this.registerForm.valueChanges.pipe(debounceTime(1000)).subscribe(() => {
-      this.formErrors = this.getFormErrors();
-      console.log(this.registerForm);
-      console.log(this.formErrors);
-    });
+ 
   }
 
-  private getFormErrors(): any[] {
-    const errors: any[] = [];
-
-    // Recorre los controles del formulario
-    Object.keys(this.registerForm.controls).forEach(controlName => {
-      const control = this.registerForm.get(controlName);
-
-      // Verifica si el control tiene errores
-      if (control && control.errors) {
-        // Agrega el objeto completo de errores al array
-        errors.push({
-          control: controlName,
-          errors: control.errors
-        });
-      }
-    });
-
-    // Devuelve el array de objetos de errores
-    return errors;
-  }
+ 
 
 }

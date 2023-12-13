@@ -1,7 +1,6 @@
-<div *ngIf="formErrors.length > 0">
-
+<div>
   <ion-list>
-    <ion-item *ngFor="let error of formErrors">
+    <ion-item *ngFor="let error of getFormErrors()">
       <ion-label>{{ error | json }}</ion-label>
     </ion-item>
   </ion-list>

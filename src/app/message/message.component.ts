@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-message',
@@ -9,10 +9,11 @@ import { FormGroup } from '@angular/forms';
 export class MessageComponent {
 
   @Input() genericForm: FormGroup | undefined;
-  formErrors: any[] = [];
+  
   constructor() { }
 
-  private getFormErrors(): any[] {
+  public getFormErrors(): any[] {
+    console.log(this.genericForm);
     const errors: any[] = [];
     if (this.genericForm) {
       // Recorre los controles del formulario
@@ -29,8 +30,6 @@ export class MessageComponent {
         }
       });
     }
-
-
     // Devuelve el array de objetos de errores
     return errors;
   }
