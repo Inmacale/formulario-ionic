@@ -1,3 +1,8 @@
-<p>
-  {{genericForm}}
-</p>
+<div *ngIf="formErrors.length > 0">
+
+  <ion-list>
+    <ion-item *ngFor="let error of formErrors">
+      <ion-label>{{ error | json }}</ion-label>
+    </ion-item>
+  </ion-list>
+</div>
