@@ -8,15 +8,19 @@ import { FormularioPageRoutingModule } from './formulario-routing.module';
 
 import { FormularioPage } from './formulario.page';
 
+import { MessageComponent } from './';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     FormularioPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+
+
 
   ],
-  declarations: [FormularioPage]
+  declarations: [FormularioPage, MessageComponent]
 })
 export class FormularioPageModule { }
