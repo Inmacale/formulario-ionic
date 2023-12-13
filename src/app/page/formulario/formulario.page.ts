@@ -20,11 +20,12 @@ export class FormularioPage {
     this.registerForm = this.formBuilder.group({
       selectCountry: new FormControl('', [Validators.required]),
       firstName: new FormControl('', [Validators.required]),
-      lastName: new FormControl(''),
+      lastName: new FormControl('', [Validators.required]),
       company: new FormControl('', [Validators.required]),
-      phone: new FormControl('', [Validators.required]),
-      termsConditions: new FormControl(false, [Validators.required]),
-      privacyPolicy: new FormControl(false, [Validators.required])
+      phone: new FormControl('', [Validators.required, Validators.pattern(/^(?:\d{9}|\d{3}\s\d{3}\s\d{3})$/)]),
+      email: new FormControl('', [Validators.email]),
+      termsConditions: new FormControl(false, [Validators.requiredTrue]),
+      privacyPolicy: new FormControl(false, [Validators.requiredTrue])
 
     })
   }
