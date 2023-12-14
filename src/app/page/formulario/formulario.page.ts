@@ -21,61 +21,39 @@ export class FormularioPage {
 
   private createForm(): void {
     this.registerForm = this.formBuilder.group({
-      selectCountry: new FormControl('', [Validators.required]),
+      selectCountry: new FormControl(''),
       firstName: new FormControl('', [Validators.required]),
       lastName: new FormControl('', [Validators.required]),
-      company: new FormControl('', [Validators.required]),
+      company: new FormControl(''),
       phone: new FormControl('', [Validators.required, Validators.pattern(/^(?:\d{9}|\d{3}\s\d{3}\s\d{3})$/)]),
-      email: new FormControl('', [Validators.email]),
+      email: new FormControl('', [Validators.required, Validators.email]),
       termsConditions: new FormControl(false, [Validators.requiredTrue]),
       privacyPolicy: new FormControl(false, [Validators.requiredTrue])
     });
 
 
     this.registerForm.valueChanges.pipe(debounceTime(1000)).subscribe(() => {
-      this.generateKeyErrors();
     });
 
-    
+
   }
 
-  private generateKeyErrors() {
-    console.log(this.registerForm);
-    const keyErrors:string[] = [];
-    Object.keys(this.registerForm.controls).forEach(controlName => {
-      const control = this.registerForm.get(controlName);
-      if(control && control.errors) {
-        switch(controlName) {
-          case 'selectCountry':
-            if(control.errors?.['required']) {
-              console.log('entro');
-              keyErrors.push('error.selectCounry.required');
-            }
-            break;
-          case 'firstName':
-            if(!control.pristine && control.errors?.['required']) {
-              keyErrors.push('error.firstName.required');
-            }
-            break;
-          case 'lastName':
-            if(!control.pristine && control.errors?.['required']) {
-              keyErrors.push('error.lastName.required');
-            }
-            break;
-          case 'company':
-            if(!control.pristine && control.errors?.['required']) {
-              keyErrors.push('error.company.required');
-            }
-            break;
-        }
-      }
-    });
-    this.keyMessage = keyErrors;
-    console.log(this.keyMessage);
+
+
+  public getErrorsField(key: string): { valid: boolean, errors: ValidationErrors[] | any } {
+    const formC = this.registerForm.get(key);
+    const validation = {
+      valid: formC ? (formC.valid || formC.pristine) : false,
+      errors: formC ? formC.errors : null,
+    }
+    console.log(key, validation)
+    return validation;
   }
 
+  isRequired(key: string): string {
+    return this.registerForm.get(key)?.hasValidator(Validators.required) ? ' (required)' : '';
+  }
 }
 
- 
 
 

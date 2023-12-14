@@ -9,10 +9,17 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class MessageComponent {
 
   @Input() genericForm: FormGroup | undefined;
-  
-  constructor() { }
 
-  public getFormErrors(): any[] {
+  errors: string[] | undefined;
+
+  constructor() {
+    this.genericForm.valueChanges.subscribe(() => {
+      this.getFormErrors;
+    });
+
+  }
+
+  private getFormErrors(): any[] {
     console.log(this.genericForm);
     const errors: any[] = [];
     if (this.genericForm) {

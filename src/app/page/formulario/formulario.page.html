@@ -9,8 +9,8 @@
       <ion-row>
         <ion-col size="12">
           <ion-item lines="none">
-            <ion-select label="Select country (required)" interface="popover" label-placement="floating"
-              formControlName="selectCountry">
+            <ion-select [label]="'Select country' + isRequired('selectCountry')" interface="popover"
+              label-placement="floating">
               <ion-select-option value="Spain"> Spain</ion-select-option>
               <ion-select-option value="France"> France</ion-select-option>
             </ion-select>
@@ -18,33 +18,55 @@
         </ion-col>
         <ion-col size="12">
           <ion-item lines="none">
-            <ion-input type="name" label="First name (required)" label-placement="floating" placeholder="First name"
-              formControlName="firstName"></ion-input>
+            <ion-input type="name" [label]="'First name' + isRequired('firstName')" label-placement="floating"
+              placeholder="First name" formControlName="firstName"></ion-input>
           </ion-item>
+
+
+          <div [hidden]="getErrorsField('firstName').valid">
+            El nombre es obligatorio
+          </div>
         </ion-col>
         <ion-col size="12">
           <ion-item lines="none">
-            <ion-input type="name" label="Last name (required)" label-placement="floating" placeholder="Last name"
-              formControlName="lastName"></ion-input>
+            <ion-input type="name" [label]="'Last name' + isRequired('lastName')" label-placement="floating"
+              placeholder="Last name" formControlName="lastName"></ion-input>
           </ion-item>
+          <div [hidden]="getErrorsField('lastName').valid">
+            El apellido es obligatorio
+          </div>
         </ion-col>
         <ion-col size="12">
           <ion-item lines="none">
-            <ion-input type="name" label="Company (required)" label-placement="floating" placeholder="Company"
-              formControlName="company"></ion-input>
+            <ion-input type="name" [label]="'Company' + isRequired('company')" label-placement="floating"
+              placeholder="Company" formControlName="company"></ion-input>
           </ion-item>
+          <div [hidden]="getErrorsField('company').valid">
+            La compañía es obligatoria
+          </div>
         </ion-col>
         <ion-col size="12">
           <ion-item lines="none">
-            <ion-input type="tel" label="Phone (required)" label-placement="floating" placeholder="Phone"
+            <ion-input type="tel" [label]="'Phone' + isRequired('phone')" label-placement="floating" placeholder="Phone"
               formControlName="phone"></ion-input>
           </ion-item>
+          <div [hidden]="getErrorsField('phone').valid">
+            <span *ngIf="getErrorsField('phone').errors?.['required']">
+              El teléfono es obligatorio
+            </span>
+            <span *ngIf="getErrorsField('phone').errors?.['pattern']">
+              El teléfono debe ser valido
+            </span>
+          </div>
         </ion-col>
         <ion-col size="12">
           <ion-item lines="none">
-            <ion-input type="email" label="email" label-placement="floating" placeholder="email"
+            <ion-input type="email" [label]="'email'+isRequired('email')" label-placement="floating" placeholder="email"
               formControlName="email"></ion-input>
           </ion-item>
+          <div [hidden]="getErrorsField('email').valid">
+            email no valido
+          </div>
         </ion-col>
 
         <ion-col size="12">
