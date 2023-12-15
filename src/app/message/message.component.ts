@@ -13,12 +13,11 @@ export class MessageComponent {
   errors: string[] | undefined;
 
   constructor() {
-    //this.genericForm.valueChanges.subscribe(() => {
-    // this.getFormErrors;
-    //  });
+    this.genericForm.valueChanges.subscribe(() => {
+
+    });
 
   }
-
 
 
 
