@@ -12,9 +12,12 @@ export class MessageComponent {
 
   errors: string[] | undefined;
 
-  constructor() {
-    this.genericForm.valueChanges.subscribe(() => {
+  visibleIncorrect: boolean = true;
+  visibleCorrect: boolean = true;
+  visibleWarning: boolean = true;
 
+  constructor() {
+    this.genericForm?.valueChanges.subscribe(() => {
     });
 
   }

@@ -18,19 +18,19 @@
         </ion-col>
         <ion-col size="12">
           <ion-item lines="none">
-            <ion-input type="name" [label]="'First name' + isRequired('firstName')" label-placement="floating"
+            <ion-input type="text" [label]="'First name' + isRequired('firstName')" label-placement="floating"
               placeholder="First name" formControlName="firstName"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col size="12">
           <ion-item lines="none">
-            <ion-input type="name" [label]="'Last name' + isRequired('lastName')" label-placement="floating"
+            <ion-input type="text" [label]="'Last name' + isRequired('lastName')" label-placement="floating"
               placeholder="Last name" formControlName="lastName"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col size="12">
           <ion-item lines="none">
-            <ion-input type="name" [label]="'Company' + isRequired('company')" label-placement="floating"
+            <ion-input type="text" [label]="'Company' + isRequired('company')" label-placement="floating"
               placeholder="Company" formControlName="company"></ion-input>
           </ion-item>
         </ion-col>
@@ -53,13 +53,16 @@
           <ion-checkbox mode="md" labelPlacement="end" formControlName="privacyPolicy">Accept Privacy
             Policy</ion-checkbox>
         </ion-col>
+
+
         <ion-col size="12">
+          <app-message [genericForm]="registerForm"></app-message>
           <ion-button class="register" expand="block" [disabled]="registerForm.invalid">Register</ion-button>
           <ion-button class="login" expand="block">ALREADY HAVE AN ACCOUNT? LOGIN</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
   </form>
-  <app-message [genericForm]="registerForm"></app-message>
+
 
 </ion-content>

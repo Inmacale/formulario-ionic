@@ -1,7 +1,33 @@
-<div>
+<ng-container *ngIf="visibleCorrect">
+  <ion-content>
+    <ion-label>
+      <h1> el formulario es correcto</h1>
+    </ion-label>
+  </ion-content>
+</ng-container>
 
-  <div *ngFor="let error of errors">
-    {{ error | json }}
-  </div>
+<ng-container *ngIf="visibleIncorrect">
+  <ion-content>
+    <ion-label>
+      <h1>formulario es incorrecto:</h1>
+      <h2>1. firsst requerido</h2>
+      <h2> 2. last requerido</h2>
+      <h2>3. phone requerido</h2>
+      <h2>4. email requerido</h2>
+      <h2>5. Conditions requerido</h2>
+      <h2>6. policy requerido</h2>
+      <h2>7. phone no valido</h2>
+      <h2>8. email no valido</h2>
+    </ion-label>
+  </ion-content>
+</ng-container>
 
-</div>
+<ng-container *ngIf="visibleWarning">
+  <ion-content>
+    <ion-label>
+      <h1> el formulario es correcto pero los siguientes campos estan vacios:</h1>
+      <h2>1. select esta vacio.</h2>
+      <h2>2. company esta vacio.</h2>
+    </ion-label>
+  </ion-content>
+</ng-container>
