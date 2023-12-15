@@ -30,12 +30,6 @@ export class FormularioPage {
       termsConditions: new FormControl(false, [Validators.requiredTrue]),
       privacyPolicy: new FormControl(false, [Validators.requiredTrue])
     });
-
-
-    this.registerForm.valueChanges.pipe(debounceTime(1000)).subscribe(() => {
-    });
-
-
   }
 
   public getErrorsField(key: string): { valid: boolean, errors: ValidationErrors[] | any } {

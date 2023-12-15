@@ -18,17 +18,15 @@ export class MessageComponent {
 
   constructor() {
     this.genericForm?.valueChanges.subscribe(() => {
-      this.correctForm;
-      console.log(this.visibleCorrect)
+      this.correctForm();
     });
 
   }
 
   public correctForm(): void {
+    console.log(this.genericForm)
     if (this.genericForm?.valid) {
       this.visibleCorrect = true;
-
-      console.log(this.genericForm)
     }
   }
 
