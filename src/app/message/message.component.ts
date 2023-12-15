@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
@@ -6,7 +6,7 @@ import { FormControl, FormGroup } from '@angular/forms';
   templateUrl: './message.component.html',
   styleUrls: ['./message.component.scss'],
 })
-export class MessageComponent {
+export class MessageComponent implements OnInit {
 
   @Input() genericForm: FormGroup | undefined;
 
@@ -17,15 +17,23 @@ export class MessageComponent {
   visibleWarning: boolean = false;
 
   constructor() {
+
+
+  }
+  ngOnInit(): void {
+
+    console.log(this.genericForm)
     this.genericForm?.valueChanges.subscribe(() => {
+
       this.correctForm();
+
     });
 
   }
 
   public correctForm(): void {
     console.log(this.genericForm)
-    if (this.genericForm?.valid) {
+    if (this.genericForm?.valid && this.genericForm.touched) {
       this.visibleCorrect = true;
     }
   }
