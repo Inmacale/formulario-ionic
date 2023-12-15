@@ -19,27 +19,7 @@ export class MessageComponent {
 
   }
 
-  private getFormErrors(): any[] {
-    console.log(this.genericForm);
-    const errors: any[] = [];
-    if (this.genericForm) {
-      // Recorre los controles del formulario
-      Object.keys(this.genericForm.controls).forEach(controlName => {
-        const control = this.genericForm!.get(controlName);
 
-        // Verifica si el control tiene errores
-        if (control && control.errors) {
-          // Agrega el objeto completo de errores al array
-          errors.push({
-            control: controlName,
-            errors: control.errors
-          });
-        }
-      });
-    }
-    // Devuelve el array de objetos de errores
-    return errors;
-  }
 
 
 

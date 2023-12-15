@@ -12,7 +12,7 @@ import { debounce, debounceTime } from 'rxjs';
 export class FormularioPage {
 
   registerForm: FormGroup = this.formBuilder.group({});
-  keyMessage: string[] | undefined;
+
 
 
   constructor(private formBuilder: FormBuilder) {
@@ -37,8 +37,6 @@ export class FormularioPage {
 
 
   }
-
-
 
   public getErrorsField(key: string): { valid: boolean, errors: ValidationErrors[] | any } {
     const formC = this.registerForm.get(key);
