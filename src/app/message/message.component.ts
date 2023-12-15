@@ -12,17 +12,25 @@ export class MessageComponent {
 
   errors: string[] | undefined;
 
-  visibleIncorrect: boolean = true;
-  visibleCorrect: boolean = true;
-  visibleWarning: boolean = true;
+  visibleIncorrect: boolean = false;
+  visibleCorrect: boolean = false;
+  visibleWarning: boolean = false;
 
   constructor() {
     this.genericForm?.valueChanges.subscribe(() => {
+      this.correctForm;
+      console.log(this.visibleCorrect)
     });
 
   }
 
+  public correctForm(): void {
+    if (this.genericForm?.valid) {
+      this.visibleCorrect = true;
 
+      console.log(this.genericForm)
+    }
+  }
 
 
 }
