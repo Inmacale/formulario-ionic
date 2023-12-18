@@ -34,7 +34,18 @@ export class MessageComponent implements OnInit {
   public correctForm(): void {
     console.log(this.genericForm)
     if (this.genericForm?.valid && this.genericForm.touched) {
-      this.visibleCorrect = true;
+      if (this.genericForm.getRawValue().company !== "") {
+        this.visibleCorrect = true;
+        this.visibleIncorrect = false;
+        this.visibleWarning = false;
+      } else {
+        this.visibleWarning = true;
+        this.visibleIncorrect = false;
+        this.visibleCorrect = false;
+
+      }
+    } else {
+      this.visibleIncorrect = true;
     }
   }
 

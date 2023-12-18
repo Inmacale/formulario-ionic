@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ValidationErrors } from '@angular/forms';
 import { Validators, FormControl } from '@angular/forms';
-import { ValidatorFn } from '@angular/forms';
-import { debounce, debounceTime } from 'rxjs';
+
 
 @Component({
   selector: 'app-formulario',
@@ -32,15 +31,7 @@ export class FormularioPage {
     });
   }
 
-  public getErrorsField(key: string): { valid: boolean, errors: ValidationErrors[] | any } {
-    const formC = this.registerForm.get(key);
-    const validation = {
-      valid: formC ? (formC.valid || formC.pristine) : false,
-      errors: formC ? formC.errors : null,
-    }
-    console.log(key, validation)
-    return validation;
-  }
+
 
   isRequired(key: string): string {
     return this.registerForm.get(key)?.hasValidator(Validators.required) ? ' (required)' : '';
