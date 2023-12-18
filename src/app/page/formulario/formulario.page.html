@@ -10,7 +10,7 @@
         <ion-col size="12">
           <ion-item lines="none">
             <ion-select [label]="'Select country' + isRequired('selectCountry')" interface="popover"
-              label-placement="floating">
+              label-placement="floating" formControlName="selectCountry">
               <ion-select-option value="Spain"> Spain</ion-select-option>
               <ion-select-option value="France"> France</ion-select-option>
             </ion-select>
