@@ -1,16 +1,17 @@
 <ng-container *ngIf="visibleCorrect">
   <ion-content>
-    <ion-toast trigger="open-toast" message="el formulario es correcto" [duration]="5000" [isOpen]="visibleCorrect">
-    </ion-toast>
+    <ion-label>
+      el formulario es correcto
+    </ion-label>
   </ion-content>
 </ng-container>
 
 <ng-container *ngIf="visibleIncorrect">
-  <ion-content *ngFor="let incorrect of incorrectFields">
-    <ion-toast trigger="open-toast" message="El formulario es incorrecto: {{incorrect}}" [duration]="5000"
-      [isOpen]="visibleIncorrect">>
-
-    </ion-toast>
+  <ion-content>
+    <ion-label>
+      El formulario es incorrecto:
+      <h2 *ngFor="let incorrect of incorrectFields">{{incorrect}} </h2>
+    </ion-label>
   </ion-content>
 </ng-container>
 
