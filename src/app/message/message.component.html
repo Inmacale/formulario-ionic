@@ -1,17 +1,16 @@
 <ng-container *ngIf="visibleCorrect">
   <ion-content>
-    <ion-label>
-      <h1> el formulario es correcto</h1>
-    </ion-label>
+    <ion-toast trigger="open-toast" message="el formulario es correcto" [duration]="5000" [isOpen]="visibleCorrect">
+    </ion-toast>
   </ion-content>
 </ng-container>
 
 <ng-container *ngIf="visibleIncorrect">
-  <ion-content>
-    <ion-label>
-      <h1>El formulario es incorrecto: </h1>
-      <h2 *ngFor="let incorrect of incorrectFields">{{incorrect}} </h2>
-    </ion-label>
+  <ion-content *ngFor="let incorrect of incorrectFields">
+    <ion-toast trigger="open-toast" message="El formulario es incorrecto: {{incorrect}}" [duration]="5000"
+      [isOpen]="visibleIncorrect">>
+
+    </ion-toast>
   </ion-content>
 </ng-container>
 
@@ -20,7 +19,6 @@
     <ion-label>
       <h1> el formulario es correcto pero los siguientes campos estan vacios:</h1>
       <h2 *ngFor="let watning of WarningFields">{{watning}} </h2>
-
     </ion-label>
   </ion-content>
 </ng-container>

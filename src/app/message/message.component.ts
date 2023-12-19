@@ -16,8 +16,10 @@ export class MessageComponent implements OnInit {
   visibleCorrect: boolean = false;
   visibleWarning: boolean = false;
 
+
   incorrectFields: string[] | undefined;
   WarningFields: string[] | undefined;
+
 
 
   constructor() {
@@ -59,32 +61,23 @@ export class MessageComponent implements OnInit {
 
     const fields: string[] = [];
     this.visibleIncorrect = true;
-    if (this.genericForm?.get('firstName')?.invalid) {
-      fields.push('First Name es requerido');
-    }
-    if (this.genericForm?.get('lastName')?.invalid) {
-      fields.push('Last Name es requerido');
-    }
-    if (this.genericForm?.get('email')?.hasError('required')) {
-      fields.push('email es requerido');
-    }
-    if (this.genericForm?.get('email')?.hasError('email')) {
-      fields.push('email no valido');
-    }
+    const controlsToValidate = ['firstName', 'lastName', 'phone', 'email', 'termsConditions', 'privacyPolicy'];
 
-    if (this.genericForm?.get('phone')?.hasError('required')) {
-      fields.push('phone es requerido');
-    }
-    if (this.genericForm?.get('phone')?.hasError('pattern')) {
-      fields.push('phone no valido');
-    }
+    controlsToValidate.forEach(controlName => {
+      const control = this.genericForm?.get(controlName);
+      if (control?.hasError('required')) {
+        let errorMessage = `${controlName} es requerido`;
+        fields.push(errorMessage);
+      }
+      if (controlName === 'phone' && control?.hasError('pattern')) {
+        const errorMessage = 'phone no valido';
+        fields.push(errorMessage);
+      } else if (controlName === 'email' && control?.hasError('email')) {
+        const errorMessage = 'email no valido';
+        fields.push(errorMessage);
+      }
+    })
 
-    if (this.genericForm?.get('termsConditions')?.invalid) {
-      fields.push('los terminos y condiciones es requerido');
-    }
-    if (this.genericForm?.get('privacyPolicy')?.invalid) {
-      fields.push('la politica de privacidad es requerido');
-    }
     this.incorrectFields = fields;
   }
 
@@ -92,15 +85,17 @@ export class MessageComponent implements OnInit {
 
     const fields: string[] = [];
     this.visibleWarning = true;
-    if (this.genericForm?.getRawValue().selectCountry == "") {
-      fields.push('select country');
-    }
+    const controlsToValidate = ['selectCountry', 'company'];
 
-    if (this.genericForm?.getRawValue().company == "") {
-      fields.push('company');
-    }
-    console.log(fields)
+    controlsToValidate.forEach(controlName => {
+      const control = this.genericForm?.getRawValue()[controlName];
+      if (control == "") {
+        const warningMessage = `${controlName}`;
+        fields.push(warningMessage);
+      }
+    })
     this.WarningFields = fields;
   }
+
 
 }
