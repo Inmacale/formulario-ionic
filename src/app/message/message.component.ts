@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-message',
@@ -11,17 +10,21 @@ export class MessageComponent implements OnInit {
 
   @Input() genericForm: FormGroup | undefined;
 
+  errors: string[] | undefined;
 
   visibleIncorrect: boolean = false;
   visibleCorrect: boolean = false;
   visibleWarning: boolean = false;
 
 
-  incorrectFields: string[] | undefined;
-  WarningFields: string[] | undefined;
 
 
-  constructor(private toastController: ToastController) {
+  fields: string[] | undefined;
+
+
+
+  constructor() {
+
 
   }
   ngOnInit(): void {
@@ -40,6 +43,7 @@ export class MessageComponent implements OnInit {
     if (this.genericForm?.valid && this.genericForm.touched) {
       if (this.genericForm.getRawValue().selectCountry !== "" && this.genericForm.getRawValue().company !== "") {
         this.visibleCorrect = true;
+        this.fields = [];
         this.visibleIncorrect = false;
         this.visibleWarning = false;
       } else {
@@ -76,8 +80,7 @@ export class MessageComponent implements OnInit {
       }
     })
 
-    this.incorrectFields = fields;
-    this.presentToastIncorrect(this.incorrectFields);
+    this.fields = fields;
   }
 
   public buildMessageWarning() {
@@ -93,54 +96,8 @@ export class MessageComponent implements OnInit {
         fields.push(warningMessage);
       }
     })
-    this.WarningFields = fields;
-    this.presentToastWarning(this.WarningFields);
+    this.fields = fields;
   }
-
-
-  async presentToastIncorrect(messages: string[]) {
-    const listItems = messages;
-
-    const toast = await this.toastController.create({
-      message: 'el formulario es incorrecto: ' + this.generateListHTML(listItems),
-      duration: 5000,
-      position: 'bottom',
-      color: 'danger',
-
-    });
-
-    await toast.present();
-  }
-
-
-  async presentToastWarning(messages: string[]) {
-    const listItems = messages;
-
-    const toast = await this.toastController.create({
-      message: 'el formulario es correcto pero lo siguientes campos están vacios: ' + this.generateListHTML(listItems),
-      duration: 5000,
-      position: 'bottom',
-      color: 'warning',
-
-    });
-
-    await toast.present();
-  }
-
-
-
-  generateListHTML(items: string[]): string {
-    let listHTML = '';
-    items.forEach((item) => {
-      listHTML += `${item}`;
-
-    });
-
-    return listHTML;
-
-  }
-
-
 
 
 }

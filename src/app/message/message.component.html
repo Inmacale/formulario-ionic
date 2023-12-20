@@ -1,7 +1,14 @@
-<ion-content>
-  <ion-toast [isOpen]="visibleCorrect" message="el formulario es correcto" [duration]="5000" color="success">
-  </ion-toast>
+<div *ngIf="visibleCorrect || visibleIncorrect || visibleWarning"
+  [ngClass]="{'incorrect-content':visibleIncorrect, 'warning-content': visibleWarning}">
+  <p *ngIf="visibleCorrect">
+    el formulario es correcto
+  </p>
+  <p *ngIf="visibleIncorrect">El formulario es incorrecto:
+  </p>
+  <p *ngIf="visibleWarning">el formulario es correcto pero los siguientes campos estan vacios: </p>
 
+  <ul>
+    <li *ngFor="let field of fields">{{field}} </li>
+  </ul>
 
-
-</ion-content>
+</div>
