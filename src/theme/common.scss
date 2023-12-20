@@ -3,3 +3,10 @@ ion-radio-group {
         --border-color: #fff;
     }
 }
+
+ion-content {
+    &::part(scroll) {
+        padding-bottom: 5px;
+    }
+
+}

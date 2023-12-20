@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-message',
@@ -10,7 +11,6 @@ export class MessageComponent implements OnInit {
 
   @Input() genericForm: FormGroup | undefined;
 
-  errors: string[] | undefined;
 
   visibleIncorrect: boolean = false;
   visibleCorrect: boolean = false;
@@ -21,9 +21,7 @@ export class MessageComponent implements OnInit {
   WarningFields: string[] | undefined;
 
 
-
-  constructor() {
-
+  constructor(private toastController: ToastController) {
 
   }
   ngOnInit(): void {
@@ -79,6 +77,7 @@ export class MessageComponent implements OnInit {
     })
 
     this.incorrectFields = fields;
+    this.presentToastIncorrect(this.incorrectFields);
   }
 
   public buildMessageWarning() {
@@ -95,10 +94,51 @@ export class MessageComponent implements OnInit {
       }
     })
     this.WarningFields = fields;
+    this.presentToastWarning(this.WarningFields);
+  }
+
+
+  async presentToastIncorrect(messages: string[]) {
+    const listItems = messages;
+
+    const toast = await this.toastController.create({
+      message: 'el formulario es incorrecto: ' + this.generateListHTML(listItems),
+      duration: 5000,
+      position: 'bottom',
+      color: 'danger',
+
+    });
+
+    await toast.present();
+  }
+
+
+  async presentToastWarning(messages: string[]) {
+    const listItems = messages;
+
+    const toast = await this.toastController.create({
+      message: 'el formulario es correcto pero lo siguientes campos están vacios: ' + this.generateListHTML(listItems),
+      duration: 5000,
+      position: 'bottom',
+      color: 'warning',
+
+    });
+
+    await toast.present();
   }
 
 
 
+  generateListHTML(items: string[]): string {
+    let listHTML = '';
+    items.forEach((item) => {
+      listHTML += `${item}`;
+
+    });
+
+    return listHTML;
+
+  }
 
 
 
