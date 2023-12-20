@@ -97,17 +97,10 @@ export class MessageComponent implements OnInit {
     this.WarningFields = fields;
   }
 
-  public setOpen(): boolean {
-    if (this.visibleIncorrect) {
-      this.visibleIncorrect = false
-      return this.visibleIncorrect;
-    } else {
-      this.visibleWarning = false;
-      return this.visibleWarning;
-    }
 
 
-  }
+
+
 
 
 }
