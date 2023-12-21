@@ -10,23 +10,12 @@ export class MessageComponent implements OnInit {
 
   @Input() genericForm: FormGroup | undefined;
 
-  errors: string[] | undefined;
-
   visibleIncorrect: boolean = false;
   visibleCorrect: boolean = false;
   visibleWarning: boolean = false;
 
-
-
-
   fields: string[] | undefined;
 
-
-
-  constructor() {
-
-
-  }
   ngOnInit(): void {
 
     console.log(this.genericForm)
@@ -39,23 +28,16 @@ export class MessageComponent implements OnInit {
   }
 
   public correctForm(): void {
-    console.log(this.genericForm)
+
     if (this.genericForm?.valid && this.genericForm.touched) {
       if (this.genericForm.getRawValue().selectCountry !== "" && this.genericForm.getRawValue().company !== "") {
-        this.visibleCorrect = true;
-        this.fields = [];
-        this.visibleIncorrect = false;
-        this.visibleWarning = false;
+        this.buildMessageCorrect();
       } else {
         this.buildMessageWarning();
-        this.visibleIncorrect = false;
-        this.visibleCorrect = false;
-
       }
     } else {
       this.buildMessageIncorrect();
-      this.visibleCorrect = false;
-      this.visibleWarning = false;
+
     }
   }
 
@@ -79,7 +61,8 @@ export class MessageComponent implements OnInit {
         fields.push(errorMessage);
       }
     })
-
+    this.visibleCorrect = false;
+    this.visibleWarning = false;
     this.fields = fields;
   }
 
@@ -96,7 +79,16 @@ export class MessageComponent implements OnInit {
         fields.push(warningMessage);
       }
     })
+    this.visibleIncorrect = false;
+    this.visibleCorrect = false;
     this.fields = fields;
+  }
+
+  public buildMessageCorrect() {
+    this.visibleCorrect = true;
+    this.fields = [];
+    this.visibleIncorrect = false;
+    this.visibleWarning = false;
   }
 
 
