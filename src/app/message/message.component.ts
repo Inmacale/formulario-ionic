@@ -10,86 +10,72 @@ export class MessageComponent implements OnInit {
 
   @Input() genericForm: FormGroup | undefined;
 
-  visibleIncorrect: boolean = false;
-  visibleCorrect: boolean = false;
-  visibleWarning: boolean = false;
+  visibilityState = {
+    incorrect: false,
+    correct: false,
+    warning: false,
+  };
 
   fields: string[] | undefined;
 
   ngOnInit(): void {
-
-    console.log(this.genericForm)
+    console.log(this.genericForm);
     this.genericForm?.valueChanges.subscribe(() => {
-
       this.correctForm();
-
     });
-
   }
 
   public correctForm(): void {
-
     if (this.genericForm?.valid && this.genericForm.touched) {
       if (this.genericForm.getRawValue().selectCountry !== "" && this.genericForm.getRawValue().company !== "") {
-        this.buildMessageCorrect();
+        this.buildMessage('correct');
       } else {
-        this.buildMessageWarning();
+        this.buildMessage('warning');
       }
     } else {
-      this.buildMessageIncorrect();
-
+      this.buildMessage('incorrect');
     }
   }
 
-  public buildMessageIncorrect() {
-
+  private buildMessage(type: 'correct' | 'warning' | 'incorrect'): void {
     const fields: string[] = [];
-    this.visibleIncorrect = true;
-    const controlsToValidate = ['firstName', 'lastName', 'phone', 'email', 'termsConditions', 'privacyPolicy'];
+    this.visibilityState = { incorrect: false, correct: false, warning: false };
+    const controls = this.genericForm?.controls;
+    if (!controls) {
+      return;
+    }
 
-    controlsToValidate.forEach(controlName => {
-      const control = this.genericForm?.get(controlName);
-      if (control?.hasError('required')) {
-        let errorMessage = `${controlName} es requerido`;
-        fields.push(errorMessage);
-      }
-      if (controlName === 'phone' && control?.hasError('pattern')) {
-        const errorMessage = 'phone no valido';
-        fields.push(errorMessage);
-      } else if (controlName === 'email' && control?.hasError('email')) {
-        const errorMessage = 'email no valido';
-        fields.push(errorMessage);
-      }
-    })
-    this.visibleCorrect = false;
-    this.visibleWarning = false;
+    switch (type) {
+      case 'incorrect':
+        this.visibilityState.incorrect = true;
+        Object.keys(controls).forEach(controlName => {
+          const control = controls[controlName];
+          if (control?.hasError('required')) {
+            fields.push(`${controlName} es requerido`);
+          }
+          if (controlName === 'phone' && control?.hasError('pattern')) {
+            fields.push('phone no valido');
+          } else if (controlName === 'email' && control?.hasError('email')) {
+            fields.push('email no valido');
+          }
+        });
+        break;
+
+      case 'warning':
+        this.visibilityState.warning = true;
+        Object.keys(controls).forEach(controlName => {
+          const control = this.genericForm?.getRawValue()[controlName];
+          if (control == "") {
+            fields.push(`${controlName}`);
+          }
+        });
+        break;
+
+      case 'correct':
+        this.visibilityState.correct = true;
+        break;
+    }
+
     this.fields = fields;
   }
-
-  public buildMessageWarning() {
-
-    const fields: string[] = [];
-    this.visibleWarning = true;
-    const controlsToValidate = ['selectCountry', 'company'];
-
-    controlsToValidate.forEach(controlName => {
-      const control = this.genericForm?.getRawValue()[controlName];
-      if (control == "") {
-        const warningMessage = `${controlName}`;
-        fields.push(warningMessage);
-      }
-    })
-    this.visibleIncorrect = false;
-    this.visibleCorrect = false;
-    this.fields = fields;
-  }
-
-  public buildMessageCorrect() {
-    this.visibleCorrect = true;
-    this.fields = [];
-    this.visibleIncorrect = false;
-    this.visibleWarning = false;
-  }
-
-
 }

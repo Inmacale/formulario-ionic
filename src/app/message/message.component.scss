@@ -1,11 +1,27 @@
 :host {
-    .warning-content {
-        background-color: rgb(244, 244, 13);
+    .message {
+        border-radius: var(--border-radius);
+        border: var(--border);
+        padding: 12px;
+        padding: 12px;
+        color: #fff;
+
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 135%;
+    }
+
+    .warning {
+        background-color: var(--color-warning);
+    }
+
+    .incorrect {
+        background-color: var(--color-incorrect);
 
     }
 
-    .incorrect-content {
-        background-color: red;
-
+    .correct {
+        background-color: var(--color-correct);
     }
 }

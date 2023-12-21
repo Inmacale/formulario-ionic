@@ -1,14 +1,14 @@
-<div *ngIf="visibleCorrect || visibleIncorrect || visibleWarning"
-  [ngClass]="{'incorrect-content':visibleIncorrect, 'warning-content': visibleWarning}">
-  <p *ngIf="visibleCorrect">
-    el formulario es correcto
-  </p>
-  <p *ngIf="visibleIncorrect">El formulario es incorrecto:
-  </p>
-  <p *ngIf="visibleWarning">el formulario es correcto pero los siguientes campos estan vacios: </p>
+<div *ngIf="visibilityState.incorrect || visibilityState.correct || visibilityState.warning" class="message"
+  [ngClass]="{'incorrect': visibilityState.incorrect, 'warning': visibilityState.warning, 'correct': visibilityState.correct}">
 
-  <ul>
-    <li *ngFor="let field of fields">{{field}} </li>
+  <p *ngIf="visibilityState.correct">El formulario es correcto</p>
+
+  <p *ngIf="visibilityState.incorrect">El formulario es incorrecto:</p>
+
+  <p *ngIf="visibilityState.warning">El formulario es correcto pero los siguientes campos están vacíos:</p>
+
+  <ul *ngIf="fields && fields.length > 0">
+    <li *ngFor="let field of fields">{{ field }} </li>
   </ul>
 
 </div>

@@ -3,15 +3,10 @@ ion-item {
     --border-color: var(--color-grey);
     --border-width: 2px;
     --border-radius: 8px;
+    margin-bottom: 12px;
 
 
-    ion-input,
-    ion-select {
 
-        &.ion-valid {
-            --border-color: var(--color-state);
-        }
-    }
 
 
 }
