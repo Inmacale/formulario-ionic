@@ -3,10 +3,9 @@ ion-item {
     --border-color: var(--color-grey);
     --border-width: 2px;
     --border-radius: 8px;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
+}
 
-
-
-
-
+.itemNone {
+    --border-color: #fff;
 }

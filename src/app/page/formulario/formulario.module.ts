@@ -8,6 +8,8 @@ import { FormularioPageRoutingModule } from './formulario-routing.module';
 
 import { FormularioPage } from './formulario.page';
 import { MessageComponent } from 'src/app/message/message.component';
+import { BorderStatusDirective } from 'src/app/border-status.directive';
+
 
 
 @NgModule({
@@ -20,7 +22,8 @@ import { MessageComponent } from 'src/app/message/message.component';
 
 
 
+
   ],
-  declarations: [FormularioPage, MessageComponent]
+  declarations: [FormularioPage, MessageComponent, BorderStatusDirective]
 })
 export class FormularioPageModule { }

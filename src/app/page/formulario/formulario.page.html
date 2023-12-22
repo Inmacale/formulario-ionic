@@ -8,12 +8,15 @@
     <ion-grid>
       <ion-row>
         <ion-col size="12">
-          <ion-item lines="none">
+          <ion-item lines="none" appBorderStatus [emptyWarningColor]="'yellow'" [validColor]="'green'">
             <ion-select [label]="'Select country' + isRequired('selectCountry')" interface="popover"
               label-placement="floating" formControlName="selectCountry">
               <ion-select-option value="Spain"> Spain</ion-select-option>
               <ion-select-option value="France"> France</ion-select-option>
             </ion-select>
+            <ion-icon
+              *ngIf="registerForm.get('selectCountry')?.value === '' && registerForm.get('selectCountry')?.touched"
+              name="warning-outline" color="warning"></ion-icon>
           </ion-item>
         </ion-col>
         <ion-col size="12">
@@ -21,48 +24,56 @@
             <ion-input type="text" [label]="'First name' + isRequired('firstName')" label-placement="floating"
               placeholder="First name" formControlName="firstName">
             </ion-input>
-            <ion-icon name="alert-circle-outline" slot="end"></ion-icon>
+            <ion-icon *ngIf="!registerForm.get('firstName')?.valid && registerForm.get('firstName')?.touched"
+              name="alert-circle-outline" slot="end" color="danger"></ion-icon>
           </ion-item>
         </ion-col>
         <ion-col size="12">
           <ion-item lines="none">
             <ion-input type="text" [label]="'Last name' + isRequired('lastName')" label-placement="floating"
               placeholder="Last name" formControlName="lastName"></ion-input>
-            <ion-icon name="alert-circle-outline" slot="end"></ion-icon>
+            <ion-icon *ngIf="!registerForm.get('lastName')?.valid && registerForm.get('lastName')?.touched"
+              name="alert-circle-outline" slot="end" color="danger"></ion-icon>
           </ion-item>
         </ion-col>
         <ion-col size="12">
           <ion-item lines="none">
             <ion-input type="text" [label]="'Company' + isRequired('company')" label-placement="floating"
               placeholder="Company" formControlName="company"></ion-input>
+            <ion-icon *ngIf="registerForm.get('company')?.value === '' && registerForm.get('company')?.touched"
+              name="warning-outline" color="warning"></ion-icon>
           </ion-item>
         </ion-col>
         <ion-col size="12">
           <ion-item lines="none">
             <ion-input type="tel" [label]="'Phone' + isRequired('phone')" label-placement="floating" placeholder="Phone"
               formControlName="phone"></ion-input>
-            <ion-icon name="alert-circle-outline" slot="end"></ion-icon>
-          </ion-item>
+            <ion-icon *ngIf="!registerForm.get('phone')?.valid && registerForm.get('phone')?.touched"
+              name="alert-circle-outline" slot="end" color="danger"></ion-icon> </ion-item>
         </ion-col>
         <ion-col size="12">
           <ion-item lines="none">
             <ion-input type="email" [label]="'email'+ isRequired('email')" label-placement="floating"
               placeholder="email" formControlName="email"></ion-input>
-            <ion-icon name="alert-circle-outline" slot="end"></ion-icon>
-          </ion-item>
+            <ion-icon *ngIf="!registerForm.get('email')?.valid && registerForm.get('email')?.touched"
+              name="alert-circle-outline" slot="end" color="danger"></ion-icon> </ion-item>
         </ion-col>
 
         <ion-col size="12">
-          <ion-item lines="none">
+          <ion-item lines="none" class="itemNone">
             <ion-checkbox justify="start" labelPlacement="end" mode="md" formControlName="termsConditions">Accept
               Terms and
               Conditions
             </ion-checkbox>
+            <ion-icon
+              *ngIf="!registerForm.get('termsConditions')?.valid && registerForm.get('termsConditions')?.touched"
+              name="alert-circle-outline" slot="end" color="danger"></ion-icon>
           </ion-item>
-          <ion-item lines="none">
+          <ion-item lines="none" class="itemNone">
             <ion-checkbox justify="start" mode="md" labelPlacement="end" formControlName="privacyPolicy">Accept Privacy
               Policy</ion-checkbox>
-          </ion-item>
+            <ion-icon *ngIf="!registerForm.get('privacyPolicy')?.valid && registerForm.get('privacyPolicy')?.touched"
+              name="alert-circle-outline" slot="end" color="danger"></ion-icon> </ion-item>
 
         </ion-col>
 

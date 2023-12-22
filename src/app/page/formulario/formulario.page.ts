@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ValidationErrors } from '@angular/forms';
 import { Validators, FormControl } from '@angular/forms';
 
 
+
 @Component({
   selector: 'app-formulario',
   templateUrl: './formulario.page.html',
