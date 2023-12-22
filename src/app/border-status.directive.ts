@@ -9,8 +9,11 @@ export class BorderStatusDirective implements AfterViewInit {
   @Input() emptyWarningColor: string = 'yellow';
   @Input() invalidColor: string = 'red';
   @Input() validColor: string = 'green';
+  ngControl: any;
 
-  constructor(private el: ElementRef, private renderer: Renderer2, private ngControl: NgControl) { }
+  constructor(private el: ElementRef, private renderer: Renderer2) {
+
+  }
 
 
   ngAfterViewInit(): void {

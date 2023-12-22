@@ -20,7 +20,7 @@
           </ion-item>
         </ion-col>
         <ion-col size="12">
-          <ion-item lines="none">
+          <ion-item lines="none" appBorderStatus [emptyWarningColor]="'yellow'" [validColor]="'green'">
             <ion-input type="text" [label]="'First name' + isRequired('firstName')" label-placement="floating"
               placeholder="First name" formControlName="firstName">
             </ion-input>
