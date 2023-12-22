@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-message',
@@ -16,7 +16,7 @@ export class MessageComponent implements OnInit {
     warning: false,
   };
 
-  fields: string[] | undefined;
+  fields: string[] = [];
 
   ngOnInit(): void {
     console.log(this.genericForm);
@@ -38,44 +38,34 @@ export class MessageComponent implements OnInit {
   }
 
   private buildMessage(type: 'correct' | 'warning' | 'incorrect'): void {
-    const fields: string[] = [];
+
     this.visibilityState = { incorrect: false, correct: false, warning: false };
+    this.visibilityState[type] = true;
     const controls = this.genericForm?.controls;
     if (!controls) {
       return;
     }
+    this.fields = [];
 
-    switch (type) {
-      case 'incorrect':
-        this.visibilityState.incorrect = true;
-        Object.keys(controls).forEach(controlName => {
-          const control = controls[controlName];
-          if (control?.hasError('required')) {
-            fields.push(`${controlName} es requerido`);
-          }
-          if (controlName === 'phone' && control?.hasError('pattern')) {
-            fields.push('phone no valido');
-          } else if (controlName === 'email' && control?.hasError('email')) {
-            fields.push('email no valido');
-          }
-        });
-        break;
+    Object.keys(controls).forEach(controlName => {
+      if (type == 'incorrect') {
+        const control = controls[controlName];
+        if (control?.hasError('required')) {
+          this.fields.push(`${controlName} es requerido`);
+        }
+        if (controlName === 'phone' && control?.hasError('pattern')) {
+          this.fields.push('phone no valido');
+        } else if (controlName === 'email' && control?.hasError('email')) {
+          this.fields.push('email no valido');
+        }
+      } else if (type == 'warning') {
+        const control = this.genericForm?.getRawValue()[controlName];
+        if (control == "") {
+          this.fields.push(`${controlName}`);
+        }
+      }
+    });
 
-      case 'warning':
-        this.visibilityState.warning = true;
-        Object.keys(controls).forEach(controlName => {
-          const control = this.genericForm?.getRawValue()[controlName];
-          if (control == "") {
-            fields.push(`${controlName}`);
-          }
-        });
-        break;
-
-      case 'correct':
-        this.visibilityState.correct = true;
-        break;
-    }
-
-    this.fields = fields;
   }
+
 }

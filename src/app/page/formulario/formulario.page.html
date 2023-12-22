@@ -8,7 +8,7 @@
     <ion-grid>
       <ion-row>
         <ion-col size="12">
-          <ion-item lines="none" appBorderStatus [emptyWarningColor]="'yellow'" [validColor]="'green'">
+          <ion-item lines="none">
             <ion-select [label]="'Select country' + isRequired('selectCountry')" interface="popover"
               label-placement="floating" formControlName="selectCountry">
               <ion-select-option value="Spain"> Spain</ion-select-option>
@@ -20,7 +20,7 @@
           </ion-item>
         </ion-col>
         <ion-col size="12">
-          <ion-item lines="none" appBorderStatus [emptyWarningColor]="'yellow'" [validColor]="'green'">
+          <ion-item lines="none">
             <ion-input type="text" [label]="'First name' + isRequired('firstName')" label-placement="floating"
               placeholder="First name" formControlName="firstName">
             </ion-input>

@@ -8,7 +8,7 @@ import { FormularioPageRoutingModule } from './formulario-routing.module';
 
 import { FormularioPage } from './formulario.page';
 import { MessageComponent } from 'src/app/message/message.component';
-import { BorderStatusDirective } from 'src/app/border-status.directive';
+
 
 
 
@@ -24,6 +24,6 @@ import { BorderStatusDirective } from 'src/app/border-status.directive';
 
 
   ],
-  declarations: [FormularioPage, MessageComponent, BorderStatusDirective]
+  declarations: [FormularioPage, MessageComponent]
 })
 export class FormularioPageModule { }
